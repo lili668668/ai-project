@@ -6,12 +6,8 @@ describe('util/database', () => {
   describe('# init', () => {
     it('should can connection', () => {
       db.authenticate()
-        .then(() => {
-          assert.ok(true)
-        })
-        .catch(err => {
-          assert.fail('there is error: ' + err)
-        })
+        .then(() => assert.ok(true))
+        .catch(err => assert.fail('there is error: ' + err))
     })
   })
 })

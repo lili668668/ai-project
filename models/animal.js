@@ -6,7 +6,7 @@ const animal = db.define('animal', {
   id: {
     type: Sequelize.UUID,
     defaultValue: Sequelize.UUIDV1,
-    primaaryKey: true
+    primaryKey: true
   },
   name: {
     type: Sequelize.STRING

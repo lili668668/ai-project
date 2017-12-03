@@ -1,17 +1,23 @@
 require('rootpath')()
 const kb = require('core/kb.js')
 const assert = require('assert')
+const faker = require('faker/locale/zh_TW')
+
+var puppy = {
+  name: faker.name.findName(),
+  type: 'dog',
+  sex: 'girl',
+  build: 'small',
+  age: 'junior',
+  contact_phone: faker.phone.phoneNumber(),
+  contact_email: faker.internet.email()
+}
 
 describe('knowledge base', () => {
   describe('#add_animal', () => {
-    it('should return true when add successily', () => {
-      animal = {
-        name: '旺旺',
-        age: '年輕',
-        kind: '哈士奇犬',
-        sex: '母'
-      }
-      assert.ok(kb.add_aanimal(animal))
+    it('should return true when add successily', function() {
+      return kb.add_animal(puppy)
+        .then((result) => {assert.ok(result)})
     })
   })
 })
