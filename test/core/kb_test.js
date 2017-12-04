@@ -15,7 +15,7 @@ var puppy = {
 
 describe('knowledge base', () => {
   describe('#add_animal', () => {
-    it('should return true when add successily', function() {
+    it('should return true when add successily', () => {
       return kb.add_animal(puppy)
         .then((result) => {assert.ok(result)})
     })
