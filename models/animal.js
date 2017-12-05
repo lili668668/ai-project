@@ -27,7 +27,7 @@ const animal = db.define('animal', {
   chip_num: {
     type: Sequelize.STRING
   },
-  isSterilization: {
+  is_sterilization: {
     type: Sequelize.BOOLEAN
   },
   hair_type: {

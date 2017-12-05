@@ -4,6 +4,11 @@
   "description": "ai homework",
   "main": "index.js",
   "dependencies": {
+    "faker": "^4.1.0",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2",
+    "rootpath": "^0.1.2",
+    "rxjs": "^5.5.3",
     "sequelize": "^4.23.4",
     "sqlite3": "^3.1.13"
   },
@@ -15,7 +20,7 @@
     "db_password": ""
   },
   "scripts": {
-    "test": "mocha $(find test -name '*_test.js')"
+    "test": "mocha test/core/odkb_test.js"
   },
   "author": "ballfish",
   "license": "MIT"

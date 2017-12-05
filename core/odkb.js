@@ -10,18 +10,28 @@ const all_od = () => {
       .then(html => {
         var origin = JSON.parse(html)
         var list = []
-        rx.Observable.from(origin['result']['results'])
-        .subscribe(item => {
+        return rx.Observable.from(origin['result']['results'])
+        .forEach(item => {
           var entry = {
             id: item['_id'],
             name: item['Name'],
             type: item['Type'],
-            sex: item['Sex']
-
-
+            sex: item['Sex'],
+            build: item['Build'],
+            age: item['Age'],
+            chip_num: item['ChipNum'],
+            is_sterilization: item['isSterilization'],
+            hair_type:item['HairType'],
+            children_anlong: item['ChildreAnlong'],
+            animal_anlong: item['AnimalAnlong'],
+            resettlement: item['Resettlement'],
+            note: item['Note'],
+            contact_phone: item['Phone'],
+            contact_email: item['Email']
           }
+          list.push(entry)
         })
-        resolve()
+        .then(() => resolve(list))
       })
       .catch(err => {
         throw err
