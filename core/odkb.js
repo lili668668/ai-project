@@ -7,7 +7,7 @@ const url = 'http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire
 const all_od = () => {
   return new Promise((resolve, reject) => {
     return crawler(url)
-      .then((html) => {
+      .then(html => {
         var origin = JSON.parse(html)
         var list = []
         return rx.Observable.from(origin['result']['results'])
