@@ -1,4 +1,3 @@
-require('rootpath')()
 const crawler = require('request-promise')
 const rx = require('rxjs/Rx')
 

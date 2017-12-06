@@ -20,4 +20,11 @@ describe('knowledge base', () => {
         .then((result) => {assert.ok(result)})
     })
   })
+
+  describe('#all_animals', () => {
+    it('should return a list of animals', () => {
+      return kb.all_animals()
+        .then((result) => {assert.ok(result)})
+    })
+  })
 })
