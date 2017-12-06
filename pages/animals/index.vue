@@ -1,16 +1,33 @@
 <template>
-  <section class="container">
-    <h1 class="title">
-     動物們
-    </h1>
-    <ul class="users">
-      <li v-for="(user, index) in users" :key="index" class="user">
-        <nuxt-link :to="{ name: 'id', params: { id: index }}">
-          {{ user.name }}
-        </nuxt-link>
-      </li>
-    </ul>
-  </section>
+<div>
+  <h1 class="text-center">
+   動物們
+  </h1>
+  <table class="table">
+    <thead>
+      <th v-for="th in data['thead']"> {{ th }} </th>
+    </thead>
+    <tbody>
+      <tr v-for="td in data['tbody']" :key="td.id">
+        <td> {{ td.id }} </td>
+        <td> {{ td.name }} </td>
+        <td> {{ td.type }} </td>
+        <td> {{ td.sex }} </td>
+        <td> {{ td.build }} </td>
+        <td> {{ td.age }} </td>
+        <td> {{ td.chip_num }} </td>
+        <td> {{ td.is_sterilization }} </td>
+        <td> {{ td.hair_type }} </td>
+        <td> {{ td.children_anlong }} </td>
+        <td> {{ td.animal_anlong }} </td>
+        <td> {{ td.resettlement }} </td>
+        <td> {{ td.note }} </td>
+        <td> {{ td.contact_phone }} </td>
+        <td> {{ td.contact_email }} </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 </template>
 
 <script>
@@ -19,12 +36,7 @@ import axios from '~/plugins/axios'
 export default {
   async asyncData () {
     let { data } = await axios.get('/api/animals')
-    return { users: data }
-  },
-  head () {
-    return {
-      title: 'Users'
-    }
+    return { data: data }
   }
 }
 </script>
