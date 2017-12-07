@@ -1,4 +1,6 @@
 const animal_model = require('../models/animal.js')
+const odkb = require('./odkb.js')
+const rx = require('rxjs/Rx')
 
 const add_animal = (animal) => {
   return new Promise((resolve, reject) => {
@@ -16,7 +18,14 @@ const all_animals = () => {
       .sync()
       .then(() => {
         return animal_model.findAll()
-          .then(animals => resolve(animals))
+          .then(animals => {
+            return odkb.all_od().then(list => {
+              return rx.Observable.from(animals)
+                .forEach(animal => {
+                  list.push(animal)
+                }).then(() => resolve(list))
+            })
+          })
       })
   })
 }

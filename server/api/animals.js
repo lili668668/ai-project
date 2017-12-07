@@ -1,29 +1,22 @@
 import { Router } from 'express'
 
 const kb = require('../../core/kb.js')
-const odkb = require('../../core/odkb.js')
-const rx = require('rxjs/Rx')
 
 const router = Router()
 
 router.get('/animals', function (req, res, next) {
   kb.all_animals().then(animals => {
-    odkb.all_od().then(list => {
-      rx.Observable.from(animals)
-        .forEach(animal => {
-          list.push(animal)
-        }).then(() => {
-          var send_data = {}
-          send_data['thead'] = ['id', '名字', '種類', '性別', '體型', '年紀', '晶片編號', '是否絕育', '毛色', '是否可以跟小孩相處', '是否可以跟其他動物相處', '位置', '描述', '聯絡電話', '聯絡Email']
-          send_data['tbody'] = list
-          res.json(send_data)
-        })
-    })
+    var send_data = {}
+    send_data['thead'] = ['id', '名字', '種類', '性別', '體型', '年紀', '晶片編號', '是否絕育', '毛色', '是否可以跟小孩相處', '是否可以跟其他動物相處', '位置', '描述', '聯絡電話', '聯絡Email']
+    send_data['tbody'] = animals
+    res.json(send_data)
   })
 })
 
 /* GET user by ID. */
 router.get('/animals/:id', function (req, res, next) {
+  var id = req.params.id
+
   const id = parseInt(req.params.id)
   if (id >= 0 && id < users.length) {
     res.json(users[id])
