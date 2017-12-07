@@ -1,16 +1,16 @@
 <template>
-  <section class="container">
-    <img src="~assets/img/logo.png" alt="Nuxt.js Logo" class="logo" />
-    <h1 class="title">
-      User
-    </h1>
-    <h2 class="info">
-      {{ user.name }}
-    </h2>
-    <nuxt-link class="button" to="/">
-      Users
-    </nuxt-link>
-  </section>
+<div>
+  <h1 class="text-center banner">
+    {{ data['tbody'].name }}
+  </h1>
+  <div class="row">
+    <div class="col"></div>
+    <div class="col">
+      <p v-for="th in data['thead']"
+    </div>
+    <div class="col"></div>
+  </div>
+</div>
 </template>
 
 <script>
@@ -19,9 +19,9 @@ import axios from '~/plugins/axios'
 export default {
   name: 'id',
   asyncData ({ params, error }) {
-    return axios.get('/api/users/' + params.id)
+    return axios.get('/api/animals/' + params.id)
       .then((res) => {
-        return { user: res.data }
+        return { data: res.data }
       })
       .catch((e) => {
         error({ statusCode: 404, message: 'User not found' })
@@ -29,7 +29,7 @@ export default {
   },
   head () {
     return {
-      title: `User: ${this.user.name}`
+      title: `User: ${this.data['thead'].name} | 'AI Project'`
     }
   }
 }
