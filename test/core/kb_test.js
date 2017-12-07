@@ -15,9 +15,12 @@ var puppy = {
 
 describe('knowledge base', () => {
   describe('#add_animal', () => {
-    it('should return true when add successily', () => {
+    it('should return id when add successily', () => {
       return kb.add_animal(puppy)
-        .then((result) => {assert.ok(result)})
+        .then((result) => {
+          puppy.id = result
+          assert.ok(true)
+        })
     })
   })
 
@@ -25,6 +28,13 @@ describe('knowledge base', () => {
     it('should return a list of animals', () => {
       return kb.all_animals()
         .then((result) => {assert.ok(result)})
+    })
+  })
+
+  describe('#find_animal', () => {
+    it('should return puppy info', () => {
+      return kb.find_animal(puppy.id)
+        .then((result) => {assert.ok(puppy.id === result.id)})
     })
   })
 })

@@ -13,15 +13,7 @@
         <td> {{ td.name }} </td>
         <td> {{ td.type }} </td>
         <td> {{ td.sex }} </td>
-        <td> {{ td.build }} </td>
-        <td> {{ td.age }} </td>
-        <td> {{ td.chip_num }} </td>
-        <td> {{ td.is_sterilization }} </td>
-        <td> {{ td.hair_type }} </td>
-        <td> {{ td.children_anlong }} </td>
-        <td> {{ td.animal_anlong }} </td>
         <td> {{ td.resettlement }} </td>
-        <td> {{ td.note }} </td>
         <td> {{ td.contact_phone }} </td>
         <td> {{ td.contact_email }} </td>
       </tr>

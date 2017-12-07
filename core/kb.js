@@ -6,9 +6,7 @@ const add_animal = (animal) => {
   return new Promise((resolve, reject) => {
       return animal_model
         .sync()
-        .then(() => animal_model.create(animal))
-        .then(() => resolve(true))
-        .catch(() => resolve(false))
+        .then(() => animal_model.create(animal).then(result => resolve(result.id)))
     })
 }
 
@@ -30,5 +28,16 @@ const all_animals = () => {
   })
 }
 
+const find_animal = (id) => {
+  return new Promise((resolve, reject) => {
+    return animal_model.findOne({
+      where: {
+        id: id
+      }
+    }).then(result => resolve(result))
+  })
+}
+
 module.exports.add_animal = add_animal
 module.exports.all_animals = all_animals
+module.exports.find_animal = find_animal
