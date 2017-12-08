@@ -1,6 +1,24 @@
 const animal_model = require('../models/animal.js')
+const fact_model = require('../models/fact.js')
+const rule_model = require('../models/rule.js')
 const odkb = require('./odkb.js')
 const rx = require('rxjs/Rx')
+
+const add_fact = (fact) => {
+  return new Promise((resolve, reject) => {
+    return fact_model
+      .sync()
+      .then(() => fact_model.create(fact).then(result => resolve(result.id)))
+  })
+}
+
+const add_rule = (rule) => {
+  return new Promise((resolve, reject) => {
+    return rule_model
+      .sync()
+      .then(() => rule_model.create(rule).then(result => resolve(result.id)))
+  })
+}
 
 const add_animal = (animal) => {
   return new Promise((resolve, reject) => {
@@ -50,5 +68,7 @@ const find_animal = (id) => {
 }
 
 module.exports.add_animal = add_animal
+module.exports.add_fact = add_fact
+module.exports.add_rule = add_rule
 module.exports.all_animals = all_animals
 module.exports.find_animal = find_animal
