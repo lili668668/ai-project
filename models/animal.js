@@ -1,6 +1,5 @@
-require('rootpath')()
 const Sequelize = require('sequelize')
-const db = require('util/db.js')
+const db = require('../util/db.js')
 
 const animal = db.define('animal', {
   id: {

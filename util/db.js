@@ -1,6 +1,5 @@
-require('rootpath')()
 const Sequelize = require('sequelize')
-const config = require('config.js')
+const config = require('../config.js')
 
 const db = new Sequelize(
     config.database.name, 
