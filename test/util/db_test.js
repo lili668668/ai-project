@@ -1,5 +1,4 @@
-require('rootpath')()
-const db = require('util/db.js')
+const db = require('../../util/db.js')
 const assert = require('assert')
 
 describe('util/database', () => {
