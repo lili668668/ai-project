@@ -30,11 +30,22 @@ const all_animals = () => {
 
 const find_animal = (id) => {
   return new Promise((resolve, reject) => {
-    return animal_model.findOne({
-      where: {
-        id: id
-      }
-    }).then(result => resolve(result))
+    return odkb.all_od().then(list => {
+      return rx.Observable.from(list)
+        .find(item => item.id === id)
+        .toPromise()
+        .then(animal => {
+          if (animal) {
+            resolve(animal)
+          } else {
+            return animal_model.findOne({
+              where: {
+                id: id
+              }
+            }).then(result => resolve(result))
+          }
+        })
+    })
   })
 }
 

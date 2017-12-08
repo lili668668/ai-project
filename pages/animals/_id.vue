@@ -1,12 +1,26 @@
 <template>
 <div>
   <h1 class="text-center banner">
-    {{ data['tbody'].name }}
+    {{ data.animal.name }}
   </h1>
   <div class="row">
     <div class="col"></div>
     <div class="col">
-      <p v-for="th in data['thead']"
+      <p>id: {{ data.animal.id }}</p>
+      <p>名字: {{ data.animal.name }}</p>
+      <p>種類: {{ data.animal.type }}</p>
+      <p>性別: {{ data.animal.sex }}</p>
+      <p>體型: {{ data.animal.build }}</p>
+      <p>年紀: {{ data.animal.age }}</p>
+      <p>晶片編號: {{ data.animal.chip_num }}</p>
+      <p>是否絕育: {{ data.animal.is_sterilization }}</p>
+      <p>毛色: {{ data.animal.hair_type }}</p>
+      <p>是否可以跟小孩相處: {{ data.animal.children_anlong }}</p>
+      <p>是否可以跟其他動物相處: {{ data.animal.animal_anlong }}</p>
+      <p>位置: {{ data.animal.resettlement }}</p>
+      <p>描述: {{ data.animal.note }}</p>
+      <p>聯絡電話: {{ data.animal.contact_phone }}</p>
+      <p>聯絡Email: {{ data.animal.contact_email }}</p>
     </div>
     <div class="col"></div>
   </div>
@@ -24,12 +38,12 @@ export default {
         return { data: res.data }
       })
       .catch((e) => {
-        error({ statusCode: 404, message: 'User not found' })
+        error({ statusCode: 404, message: 'Animal not found' })
       })
   },
   head () {
     return {
-      title: `User: ${this.data['thead'].name} | 'AI Project'`
+      title: `${this.data.animal.name || 'AI Project'}`
     }
   }
 }
