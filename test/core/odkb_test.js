@@ -1,5 +1,4 @@
-require('rootpath')()
-const odkb = require('core/odkb.js')
+const odkb = require('../../core/odkb.js')
 const assert = require('assert')
 
 describe('opendata knowledge base', () => {

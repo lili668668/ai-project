@@ -1,5 +1,4 @@
-require('rootpath')()
-const kb = require('core/kb.js')
+const kb = require('../../core/kb.js')
 const assert = require('assert')
 const faker = require('faker/locale/zh_TW')
 
