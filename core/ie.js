@@ -42,14 +42,45 @@ const is_rule = (rule) => {
   }
 }
 
-const inference = (facts, rules) => {
+const get_describes = (facts) => {
+  var describes = []
   for(var cnt = 0;cnt < facts.length;cnt++) {
+    facts[cnt] = facts[cnt].trim()
     if (!is_fact(facts[cnt])) {
       throw 'One of the fact is not correct.'
     }
+    var left_bracket_index = facts[cnt].indexOf('(')
+    var right_bracket_index = facts[cnt].indexOf(')')
+    var describe = facts[cnt].substring(0, left_bracket_index).trim()
+    describes.push(describe)
   }
+  return describes
+}
+
+// backward chaining
+const inference = (facts, rules, goal) => {
+  goal = goal.trim()
+  for(var cnt = 0;cnt < facts.length;cnt++) {
+    facts[cnt] = facts[cnt].trim()
+    if (!is_fact(facts[cnt])) {
+      throw 'One of the fact is not correct.'
+    } else if(facts[cnt] === goal) {
+      return true
+    }
+  }
+
+  for(var cnt = 0;cnt < rules.length;cnt++) {
+    rules[cnt] = rules[cnt],trim()
+    if (!is_rule(rules[cnt])) {
+      throw 'One of the rule is not correct.'
+    } else if (get_describes(rules[cnt].split(':-')[0])) {
+      
+    }
+  }
+
 }
 
 module.exports.is_fact = is_fact
 module.exports.is_rule = is_rule
+module.exports.get_describes = get_describes
 module.exports.inference = inference

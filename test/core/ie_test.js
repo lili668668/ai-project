@@ -47,14 +47,35 @@ describe('inference engine', () => {
     })
   })
 
+  describe('#get_describes', () => {
+    it('should throw error when all of the facts are not format.', () => {
+      assert.throws(() => {ie.get_describes(['fruit(apple)', 'apple'])})
+    })
+
+    it('should return ["fruit", "juicy", "sweet"]', () => {
+      var expect = ['fruit', 'juicy', 'sweet']
+      var actual = ie.get_describes(['fruit(apple)', 'juicy(apple)', 'sweet(apple)'])
+      assert.deepEqual(actual, expect)
+    })
+  })
+
   describe('#inference', () => {
     it('should throw error when all of the facts are not format.', () => {
-      try {
-        ie.inference(['fruit(apple)', 'apple'], ['fruit(x) :- juicy(x)', 'fruit(x) :- sweet(x)'])
-      } catch (err) {
-        should.exist(err).and.be.an.instanceOf(Error).with.property('message', 'One of the fact is not correct.')
-      }
-      assert.throws(ie.inference(['fruit(apple)', 'apple'], ['fruit(x) :- juicy(x)', 'fruit(x) :- sweet(x)']), Error, 'One of the fact is not correct.')
+      assert.throws(() => {ie.inference(['fruit(apple)', 'apple'], ['fruit(x) :- juicy(x)', 'fruit(x) :- sweet(x)'])})
+    })
+
+    it('should throw error when all of the rules are not format.', () => {
+      assert.throws(() => {ie.inference(['fruit(apple)'], ['fruit() :- juicy(x)', 'fruit(x) :- sweet(x)'])})
+    })
+
+    it('should return true because an apple is juicy.', () => {
+      var actual = ie.inference(['juicy(apple)'], [], 'juicy(apple)')
+      assert.ok(actual)
+    })
+
+    it('should return true because an apple is a fruit.', () => {
+      var actual = ie.inference(['juicy(apple)', 'sweet(apple)'], ['fruit(x) :- juicy(x), sweet(x)'], 'fruit(apple)')
+      assert.ok(actual)
     })
   })
 })
