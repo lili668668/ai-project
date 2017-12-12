@@ -49,9 +49,7 @@ const get_describes = (facts) => {
     if (!is_fact(facts[cnt])) {
       throw 'One of the fact is not correct.'
     }
-    var left_bracket_index = facts[cnt].indexOf('(')
-    var describe = facts[cnt].substring(0, left_bracket_index).trim()
-    describes.push(describe)
+    describes.push(facts[cnt].split('(')[0].trim())
   }
   return describes
 }
@@ -59,11 +57,13 @@ const get_describes = (facts) => {
 // backward chaining
 const inference = (facts, rules, goal) => {
   goal = goal.trim()
+  facts.sort()
+  rules.sort()
   for(var cnt = 0;cnt < facts.length;cnt++) {
     facts[cnt] = facts[cnt].trim()
     if (!is_fact(facts[cnt])) {
       throw 'One of the fact is not correct.'
-    } else if(facts[cnt] === goal) {
+    } else if(facts[cnt].split('(')[0].trim() === goal.split('(')[0].trim()) {
       return true
     }
   }
@@ -77,13 +77,18 @@ const inference = (facts, rules, goal) => {
       var flag = true
       for(var cnt2 = 0;cnt2 < goals.length;cnt2++) {
         goals[cnt2] = goals[cnt2].trim()
+        var pop_rule = rules.splice(cnt, 1)
         if (!inference(facts, rules, goals[cnt2])) {
           flag = false
         }
+        rules = rules.concat(pop_rule)
       }
       if (flag) {
-        facts.push(rules[cnt].split(':-')[0])
+        var describe = get_describes([rules[cnt].split(':-')[0]])[0]
+        var fact = describe + '(' + goal.substring(goal.indexOf('(') + 1, goal.indexOf(')'))
+        facts.push(fact)
       }
+      rules.splice(cnt, 1)
       return inference(facts, rules, goal)
     }
   }
