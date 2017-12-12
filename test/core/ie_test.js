@@ -82,5 +82,10 @@ describe('inference engine', () => {
       var actual = ie.inference(['cute(cat)', 'water(cat)'], ['fruit(x) :- juicy(x), sweet(x)'], 'fruit(cat)')
       assert.ok(!actual)
     })
+
+    it('should return true because 蘋果是一種水果.', () => {
+      var actual = ie.inference(['有汁(蘋果)', '甜的(蘋果)'], ['水果(x) :- 有汁(x), 甜的(x)'], '水果(蘋果)')
+      assert.ok(actual)
+    })
   })
 })

@@ -12,6 +12,28 @@ const add_fact = (fact) => {
   })
 }
 
+const all_facts = () => {
+  return new Promise((resolve, reject) => {
+    return fact_model
+      .sync()
+      .then(() => {
+        fact_model.findAll()
+          .then(facts => resolve(facts))
+      })
+  })
+}
+
+const all_rules = () => {
+  return new Promise((resolve, reject) => {
+    return rule_model
+      .sync()
+      .then(() => {
+        rule_model.findAll()
+          .then(rules => resolve(rules))
+      })
+  })
+}
+
 const add_rule = (rule) => {
   return new Promise((resolve, reject) => {
     return rule_model
