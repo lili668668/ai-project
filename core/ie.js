@@ -50,7 +50,6 @@ const get_describes = (facts) => {
       throw 'One of the fact is not correct.'
     }
     var left_bracket_index = facts[cnt].indexOf('(')
-    var right_bracket_index = facts[cnt].indexOf(')')
     var describe = facts[cnt].substring(0, left_bracket_index).trim()
     describes.push(describe)
   }
@@ -70,13 +69,26 @@ const inference = (facts, rules, goal) => {
   }
 
   for(var cnt = 0;cnt < rules.length;cnt++) {
-    rules[cnt] = rules[cnt],trim()
+    rules[cnt] = rules[cnt].trim()
     if (!is_rule(rules[cnt])) {
       throw 'One of the rule is not correct.'
-    } else if (get_describes(rules[cnt].split(':-')[0])) {
-      
+    } else if (get_describes([rules[cnt].split(':-')[0]])[0] === get_describes([goal])[0]) {
+      var goals = rules[cnt].split(':-')[1].split(',')
+      var flag = true
+      for(var cnt2 = 0;cnt2 < goals.length;cnt2++) {
+        goals[cnt2] = goals[cnt2].trim()
+        if (!inference(facts, rules, goals[cnt2])) {
+          flag = false
+        }
+      }
+      if (flag) {
+        facts.push(rules[cnt].split(':-')[0])
+      }
+      return inference(facts, rules, goal)
     }
   }
+
+  return false
 
 }
 
