@@ -15,7 +15,7 @@ router.get('/facts', function (req, res, next) {
 
 router.post('/facts/add', function(req, res, next) {
   var data = req.body
-  var fact = `${data.describe}(${data.relation})`
+  var fact = `${data.describe_1}(${data.relation_1})`
   if (ie.is_fact(fact)) {
     var entry = { describe: fact }
     kb.add_fact(entry)

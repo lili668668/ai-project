@@ -1,28 +1,13 @@
 <template>
 <div>
   <h1 class="text-center banner">
-    加入規則
+    加入事實
   </h1>
   <div class="row">
     <div class="col-sm"></div>
     <div class="col-sm">
       <form data-toggle="validator" class="form-horizontal" action="/api/facts/add" method="post">
-        <div class="form-group row">
-          <div class="col-4">
-            <label for="describe" class="control-label text-right">描述：</label>
-          </div>
-          <div class="col-8">
-            <input type="text" class="form-control" name="describe">
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-4">
-            <label for="relation" class="control-label text-right">對象：</label>
-          </div>
-          <div class="col-8">
-            <input type="text" class="form-control" name="relation">
-          </div>
-        </div>
+        <fact-form v-bind:cnt="1"></fact-form>
         <div class="row">
           <div class="col text-center">
               <span class="pad"><button type="submit" class="btn btn-success" id="submit">加入</button></span>
@@ -38,11 +23,15 @@
 
 <script>
 import axios from '~/plugins/axios'
+import FactForm from '~/components/fact-form.vue'
 
 export default {
   async asyncData () {
     let { data } = await axios.get('/api/animals')
     return { data: data }
+  },
+  components: {
+    FactForm
   }
 }
 </script>
