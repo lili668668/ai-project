@@ -18,6 +18,7 @@ module.exports = {
       { src: "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js", type: 'text/javascript' },
       { src: "https://code.jquery.com/jquery-3.2.1.slim.min.js", type: 'text/javascript' },
       { src: "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js", type: 'text/javascript' },
+      { src: "https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js", type: 'text/javascript' },
       { src: "https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js", type: 'text/javascript' }
     ]
   },
