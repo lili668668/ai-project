@@ -1,7 +1,3 @@
-const fact_model = require('../models/fact.js')
-const rule_model = require('../models/rule.js')
-const rx = require('rxjs/Rx')
-
 const is_fact = (fact) => {
   if (typeof fact === 'string') {
     fact = fact.trim()

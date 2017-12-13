@@ -3,22 +3,35 @@
   <h1 class="text-center banner">
     加入規則
   </h1>
-  <div class="mdc-layout-grid">
-    <div class="mdc-layout-grid__inner">
-      <div class="mdc-layout-grid__cell"></div>
-      <div class="mdc-layout-grid__cell">
-        <form action="/api/bingo/add" method="post">
-          <div class="mdc-form-field">
-            <div class="mdc-text-field">
-              <input type="text" name="fact" class="mdc-text-field__input" id="fact">
-              <label for="fact" class="mdc-text-field__label">請輸入 Fact</label>
-              <div class="mdc-text-field__bottom-line"></div>
-            </div>
+  <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+      <form data-toggle="validator" class="form-horizontal" action="/api/facts/add" method="post">
+        <div class="form-group row">
+          <div class="col-4">
+            <label for="describe" class="control-label text-right">描述：</label>
           </div>
-        </form>
-      </div>
-      <div class="mdc-layout-grid__cell"></div>
+          <div class="col-8">
+            <input type="text" class="form-control" name="describe">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-4">
+            <label for="relation" class="control-label text-right">對象：</label>
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control" name="relation">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-center">
+              <span class="pad"><button type="submit" class="btn btn-success" id="submit">加入</button></span>
+              <span class="pad"><a href="javascript:window.history.back()" class="btn btn-danger" id="cancel">取消</a></span>
+          </div>
+        </div>
+      </form>
     </div>
+    <div class="col-sm"></div>
   </div>
 </div>
 </template>

@@ -17,8 +17,22 @@ const all_facts = () => {
     return fact_model
       .sync()
       .then(() => {
-        fact_model.findAll()
+        return fact_model.findAll()
           .then(facts => resolve(facts))
+      })
+  })
+}
+
+const delete_fact = (fact_id) => {
+  return new Promise((resolve, reject) => {
+    return fact_model
+      .sync()
+      .then(() => {
+        return fact_model.destroy({
+          where: {
+            id: fact_id
+          }
+        })
       })
   })
 }
@@ -28,7 +42,7 @@ const all_rules = () => {
     return rule_model
       .sync()
       .then(() => {
-        rule_model.findAll()
+        return rule_model.findAll()
           .then(rules => resolve(rules))
       })
   })
@@ -91,6 +105,9 @@ const find_animal = (id) => {
 
 module.exports.add_animal = add_animal
 module.exports.add_fact = add_fact
+module.exports.delete_fact = delete_fact
 module.exports.add_rule = add_rule
 module.exports.all_animals = all_animals
+module.exports.all_facts = all_facts
+module.exports.all_rules = all_rules
 module.exports.find_animal = find_animal
