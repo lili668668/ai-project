@@ -30,6 +30,8 @@ const all_od = () => {
           }
           list.push(entry)
         }).then(() => resolve(list))
+      }).catch(err => {
+        reject(err)
       })
   }) 
 }

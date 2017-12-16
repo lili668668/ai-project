@@ -89,7 +89,20 @@ const all_animals = () => {
               return rx.Observable.from(animals)
                 .forEach(animal => {
                   list.push(animal)
-                }).then(() => resolve(list))
+                }).then(() => {
+                  var obj = {
+                    error: false,
+                    list: list
+                  }
+                  resolve(obj)
+                })
+            })
+            .catch(() => {
+              var obj = {
+                error: true,
+                list: animals
+              }
+              resolve(obj)
             })
           })
       })

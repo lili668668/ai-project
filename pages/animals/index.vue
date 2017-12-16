@@ -6,6 +6,10 @@
   <div class="row">
     <div class="col"></div>
     <div class="col">
+      <div v-if="data['error']">
+        <p><a href="http://data.taipei">台北市開放資料平台</a>目前狀態不穩</p>
+        <p>因此僅提供部份資料</p>
+      </div>
       <table class="table">
         <thead>
           <th v-for="th in data['thead']">  {{ th }} </th>
