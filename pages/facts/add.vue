@@ -26,10 +26,6 @@ import axios from '~/plugins/axios'
 import FactForm from '~/components/fact-form.vue'
 
 export default {
-  async asyncData () {
-    let { data } = await axios.get('/api/animals')
-    return { data: data }
-  },
   components: {
     FactForm
   }
@@ -37,19 +33,4 @@ export default {
 </script>
 
 <style>
-.app-fab--absolute {
-  position: fixed;
-  bottom: 1rem;
-  right: 1rem;
-
-}
-
-@media(min-width: 1024px) {
-  .app-fab--absolute {
-    bottom: 1.5rem;
-    right: 1.5rem;
-            
-  }
-
-}
 </style>

@@ -13,10 +13,15 @@
         <div class="form-group row">
           <label for="if_num" class="col-4 control-label text-right">有幾個前因</label>
           <div class="col-8">
-            <input type="number" class="form-control" name="if_num" v-model="if_num" min="1" step="1">
+            <input type="number" class="form-control" name="if_num" v-bind:value="if_num" v-on:input="updateValue($event.target.value)" min="1" step="1">
           </div>
         </div>
-        <fact-form v-for="n in if_num" :key="n" v-bind:cnt="n"></fact-form>
+        <template v-if="show === 'Yes'">
+          <fact-form v-for="n in parseInt(if_num)" :key="n" v-bind:cnt="n"></fact-form>
+        </template>
+        <template v-else>
+          <div></div>
+        </template>
         <div class="row text-center">
           則
         </div>
@@ -55,11 +60,17 @@ import FactForm from '~/components/fact-form.vue'
 
 export default {
   props: {
-    if_num: { type: Number, default: 1 }
+    if_num: { type: Number, default: 1 },
+    show: { type: String, default: 'Yes' }
   },
-  async asyncData () {
-    let { data } = await axios.get('/api/animals')
-    return { data: data }
+  methods: {
+    updateValue: function (value) {
+      this.show = 'No'
+      this.$nextTick(function () {
+        this.show = 'Yes'
+        this.if_num = value
+      })
+    }
   },
   components: {
     FactForm
@@ -68,19 +79,4 @@ export default {
 </script>
 
 <style>
-.app-fab--absolute {
-  position: fixed;
-  bottom: 1rem;
-  right: 1rem;
-
-}
-
-@media(min-width: 1024px) {
-  .app-fab--absolute {
-    bottom: 1.5rem;
-    right: 1.5rem;
-            
-  }
-
-}
 </style>
