@@ -29,6 +29,9 @@ export default {
   },
   methods: {
     send_message: function () {
+      if (this.$refs.msg.value === '') {
+        return
+      }
       this.show = 'No'
       var log = {
         name: 'me',
@@ -38,6 +41,7 @@ export default {
       this.$nextTick(function () {
         this.$refs.msg.value = ''
         this.show = 'Yes'
+        this.$socket.emit('send_message', log)
       })
     }
   },

@@ -44,7 +44,9 @@ app.use(nuxt.render)
 const server = http.createServer(app)
 const io = socketio(server)
 io.on('connection', (socket) => {
-  
+  socket.on('send_message', (pack) => {
+    socket.emit('push_message', {name: 'chatbot', content: 'wow'})
+  })
 })
 
 server.listen(port, host)
