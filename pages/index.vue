@@ -1,48 +1,95 @@
 <template>
-  <section class="container">
-    <img src="~assets/img/logo.png" alt="Nuxt.js Logo" class="logo" />
-    <h1 class="title">
-      USERS
-    </h1>
-    <ul class="users">
-      <li v-for="(user, index) in users" :key="index" class="user">
-        <nuxt-link :to="{ name: 'id', params: { id: index }}">
-          {{ user.name }}
-        </nuxt-link>
-      </li>
-    </ul>
-  </section>
+<div>
+    <div style="min-height: 80vh;">
+      <template v-if="show === 'Yes'" v-for="log in logs">
+        <me-chat-frame v-if="log.name === 'me'" :text="log.content"></me-chat-frame>
+        <chatbot-chat-frame v-if="log.name === 'chatbot'" :text="log.content">
+        </chatbot-chat-frame>
+      </template>
+      <template v-else>
+        <div></div>
+      </template>
+    </div>
+    <div id="push">
+      <form>
+          <input id="talk" autocomplete="off" ref="msg" /><button id="sub" @click.prevent="send_message()"><img src="~assets/img/send12.png" alt="Send" /></button>
+       </form>
+     </div>
+</div>
 </template>
 
 <script>
-import axios from '~/plugins/axios'
+import MeChatFrame from '~/components/me-chat-frame.vue'
+import ChatbotChatFrame from '~/components/chatbot-chat-frame.vue'
 
 export default {
-  async asyncData () {
-    let { data } = await axios.get('/api/users')
-    return { users: data }
+  props: {
+    logs: { type: Array, default: [] },
+    show: { type: String, default: 'Yes' }
   },
-  head () {
-    return {
-      title: 'Users'
+  methods: {
+    send_message: function () {
+      this.show = 'No'
+      var log = {
+        name: 'me',
+        content: this.$refs.msg.value
+      }
+      this.logs.push(log)
+      this.$nextTick(function () {
+        this.$refs.msg.value = ''
+        this.show = 'Yes'
+      })
     }
+  },
+  mounted: function () {
+  },
+  sockets: {
+    push_message: function (pack) {
+      this.show = 'No'
+      this.logs.push(pack)
+      this.$nextTick(function () {
+        this.show = 'Yes'
+      })
+    }
+  },
+  components: {
+    MeChatFrame,
+    ChatbotChatFrame
   }
 }
 </script>
 
-<style scoped>
-.title
-{
-  margin: 30px 0;
+<style>
+#push {
+  bottom: 0%;
+  background-color: white;
+  width: 100%;
+  padding-bottom: 2%;
 }
-.users
-{
-  list-style: none;
-  margin: 0;
-  padding: 0;
+#talk {
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+  border-color: blue;
+  border-radius: 5px;
+  left: 5%;
+  width: 80%;
+  height: 12%;
+  resize: none;
 }
-.user
-{
-  margin: 10px 0;
+#sub {
+  display: inline-block;
+  position: relative;
+  left: 5%;
+  font-size: X-large;
+  color: white;
+  background-color: #6A7FF6;
+  border-radius: 5px;
+}
+#sub img {
+  max-width: 80px;
+  max-height: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 </style>

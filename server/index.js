@@ -1,6 +1,8 @@
 import express from 'express'
 import { Nuxt, Builder } from 'nuxt'
 import bodyparser from 'body-parser'
+import http from 'http'
+import socketio from 'socket.io'
 
 import api from './api'
 
@@ -15,25 +17,35 @@ app.use( bodyparser.urlencoded({
     extended: true
 }) )
 
-// Import API Routes
+app.use(function (req, res, next) {
+
+  res.header('Access-Control-Allow-Origin', ('http://' + host + ":" + port));
+
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
+  next();
+});
+
 app.use('/api', api)
 
-// Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')
 config.dev = !(process.env.NODE_ENV === 'production')
 
-// Init Nuxt.js
 const nuxt = new Nuxt(config)
 
-// Build only in dev mode
 if (config.dev) {
   const builder = new Builder(nuxt)
   builder.build()
 }
 
-// Give nuxt middleware to express
 app.use(nuxt.render)
 
-// Listen the server
-app.listen(port, host)
+// socket
+const server = http.createServer(app)
+const io = socketio(server)
+io.on('connection', (socket) => {
+  
+})
+
+server.listen(port, host)
 console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console
