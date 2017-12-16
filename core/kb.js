@@ -51,6 +51,20 @@ const delete_rule = (rule_id) => {
   })
 }
 
+const delete_animal = (animal_id) => {
+  return new Promise((resolve, reject) => {
+    return animal_model
+      .sync()
+      .then(() => {
+        return animal_model.destroy({
+          where: {
+            id: animal_id
+          }
+        })
+      })
+  })
+}
+
 const all_rules = () => {
   return new Promise((resolve, reject) => {
     return rule_model
@@ -117,20 +131,32 @@ const find_animal = (id) => {
         .toPromise()
         .then(animal => {
           if (animal) {
-            resolve(animal)
+            resolve({animal: animal, can_delete: false})
           } else {
             return animal_model.findOne({
               where: {
                 id: id
               }
-            }).then(result => resolve(result))
+            }).then(result => {
+              resolve({animal: result, can_delete: true})
+            })
           }
         })
+    })
+    .catch(() => {
+      return animal_model.findOne({
+        where: {
+          id: id
+        }
+      }).then(result => {
+        resolve({animal: result, can_delete: true})
+      })
     })
   })
 }
 
 module.exports.add_animal = add_animal
+module.exports.delete_animal = delete_animal
 module.exports.add_fact = add_fact
 module.exports.delete_fact = delete_fact
 module.exports.add_rule = add_rule

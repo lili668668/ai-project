@@ -21,6 +21,12 @@
       <p>描述: {{ data.animal.note }}</p>
       <p>聯絡電話: {{ data.animal.contact_phone }}</p>
       <p>聯絡Email: {{ data.animal.contact_email }}</p>
+      <div class="text-center">
+        <a href="/animals" class="btn btn-primary button">回列表</a>
+        <a v-if="data.can_delete" :href="'/api/animals/delete/' + data.animal.id" class="btn btn-danger button">
+          刪除
+        </a>
+      </div>
     </div>
     <div class="col"></div>
   </div>
@@ -63,6 +69,7 @@ export default {
 }
 .button
 {
-  margin-top: 30px;
+  margin-left: 30px;
+  margin-right: 30px;
 }
 </style>

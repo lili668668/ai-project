@@ -1,7 +1,7 @@
 <template>
 <div>
   <h1 class="text-center banner">
-   規則們
+   事實們
   </h1>
   <div class="mdc-layout-grid">
     <div class="mdc-layout-grid__inner">
