@@ -26,4 +26,10 @@ router.get('/animals/:id', function (req, res, next) {
 
 })
 
+router.post('/animals/add', function(req, res, next) {
+  var data = req.body
+  kb.add_animal(data)
+  res.redirect('/animals')
+})
+
 export default router

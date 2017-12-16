@@ -29,6 +29,11 @@
     </div>
     <div class="col"></div>
   </div>
+  <a href="/animals/add" class="mdc-fab material-icons app-fab--absolute" aria-label="Add">
+    <span class="mdc-fab__icon">
+      <img src="~assets/img/ic_add_black_24px.svg" alt="add"/>
+    </span>
+  </a>
 </div>
 </template>
 
@@ -44,4 +49,19 @@ export default {
 </script>
 
 <style>
+.app-fab--absolute {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+
+}
+
+@media(min-width: 1024px) {
+  .app-fab--absolute {
+    bottom: 1.5rem;
+    right: 1.5rem;
+            
+  }
+
+}
 </style>
