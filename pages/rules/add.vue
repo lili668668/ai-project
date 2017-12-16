@@ -6,14 +6,14 @@
   <div class="row">
     <div class="col-sm"></div>
     <div class="col-sm">
-      <form data-toggle="validator" class="form-horizontal" action="/api/facts/add" method="post">
+      <form data-toggle="validator" class="form-horizontal" action="/api/rules/add" method="post">
         <div class="row">
           如果
         </div>
         <div class="form-group row">
           <label for="if_num" class="col-4 control-label text-right">有幾個前因</label>
           <div class="col-8">
-            <input type="number" class="form-control" name="if_num" v-bind:value="if_num" v-on:input="updateValue($event.target.value)" min="1" step="1">
+            <input type="number" class="form-control" name="if_num" v-bind:value="if_num" v-on:input="updateValue($event.target.value)" min="1" max="10" step="1">
           </div>
         </div>
         <template v-if="show === 'Yes'">
@@ -25,22 +25,7 @@
         <div class="row text-center">
           則
         </div>
-        <div class="form-group row">
-          <div class="col-4">
-            <label for="describe" class="control-label text-right">描述：</label>
-          </div>
-          <div class="col-8">
-            <input type="text" class="form-control" name="describe">
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-4">
-            <label for="relation" class="control-label text-right">對象：</label>
-          </div>
-          <div class="col-8">
-            <input type="text" class="form-control" name="relation">
-          </div>
-        </div>
+        <fact-form :cnt="0"></fact-form>
         <div class="row">
           <div class="col text-center">
               <span class="pad"><button type="submit" class="btn btn-success" id="submit">加入</button></span>

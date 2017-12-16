@@ -19,7 +19,7 @@
       <div class="mdc-layout-grid__cell"></div>
     </div>
   </div>
-  <a href="/facts/add" class="mdc-fab material-icons app-fab--absolute" aria-label="Add">
+  <a href="/rules/add" class="mdc-fab material-icons app-fab--absolute" aria-label="Add">
     <span class="mdc-fab__icon">
       <img src="~assets/img/ic_add_black_24px.svg" alt="add"/>
     </span>

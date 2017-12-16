@@ -37,6 +37,20 @@ const delete_fact = (fact_id) => {
   })
 }
 
+const delete_rule = (rule_id) => {
+  return new Promise((resolve, reject) => {
+    return rule_model
+      .sync()
+      .then(() => {
+        return rule_model.destroy({
+          where: {
+            id: rule_id
+          }
+        })
+      })
+  })
+}
+
 const all_rules = () => {
   return new Promise((resolve, reject) => {
     return rule_model
@@ -107,6 +121,7 @@ module.exports.add_animal = add_animal
 module.exports.add_fact = add_fact
 module.exports.delete_fact = delete_fact
 module.exports.add_rule = add_rule
+module.exports.delete_rule = delete_rule
 module.exports.all_animals = all_animals
 module.exports.all_facts = all_facts
 module.exports.all_rules = all_rules
