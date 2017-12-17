@@ -24,7 +24,7 @@ import ChatbotChatFrame from '~/components/chatbot-chat-frame.vue'
 
 export default {
   props: {
-    logs: { type: Array, default: [] },
+    logs: { type: Array, default: function () { return [] } },
     show: { type: String, default: 'Yes' }
   },
   methods: {
@@ -46,6 +46,9 @@ export default {
     }
   },
   mounted: function () {
+    this.$nextTick(function () {
+      this.logs.push({name: 'chatbot', content: '如果需要推薦，適合領養的動物，請輸入「我需要幫助」。如果不需要幫助，可以在上方「<a href="/animals">動物一覽</a>」找尋想要的浪浪'})
+    })
   },
   sockets: {
     push_message: function (pack) {

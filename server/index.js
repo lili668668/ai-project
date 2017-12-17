@@ -6,6 +6,9 @@ import socketio from 'socket.io'
 
 import api from './api'
 
+const kb = require('../core/kb.js')
+const ieif = require('../core/ieif.js')
+
 const app = express()
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
@@ -44,9 +47,20 @@ app.use(nuxt.render)
 const server = http.createServer(app)
 const io = socketio(server)
 io.on('connection', (socket) => {
-  socket.on('send_message', (pack) => {
-    socket.emit('push_message', {name: 'chatbot', content: 'wow'})
-  })
+
+  kb.all_facts()
+    .then(facts => {
+      kb.all_rules()
+        .then(rules => {
+          socket.on('send_message', (pack) => {
+            var entry = ieif.keep_talk(facts, rules, pack.content)
+            facts = entry.facts
+            rules = entry.rules
+            socket.emit('push_message', {name: 'chatbot', content: entry.content})
+          })
+        })
+    })
+
 })
 
 server.listen(port, host)

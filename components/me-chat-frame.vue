@@ -1,6 +1,6 @@
 <template>
 <div class="frame-right">
-  <div class="me">{{ text }}</div>
+  <div class="me"><p v-html='text'></p></div>
 </div>
 </template>
 

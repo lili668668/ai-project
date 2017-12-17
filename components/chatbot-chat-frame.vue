@@ -1,6 +1,6 @@
 <template>
 <div class="frame-left">
-  <div class="chatbot">{{ text }}</div>
+  <div class="chatbot"><p v-html='text'></p></div>
 </div>
 </template>
 

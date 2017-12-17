@@ -93,7 +93,14 @@ const inference = (facts, rules, goal) => {
 
 }
 
+const get_max_appear_right_fact = (rules) => {
+  for (var cnt = 0;cnt < rules.length;cnt++) {
+
+  }
+}
+
 module.exports.is_fact = is_fact
 module.exports.is_rule = is_rule
 module.exports.get_describes = get_describes
 module.exports.inference = inference
+module.exports.get_max_appear_right_fact = get_max_appear_right_fact
