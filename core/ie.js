@@ -94,9 +94,55 @@ const inference = (facts, rules, goal) => {
 }
 
 const get_max_appear_right_fact = (rules) => {
+  var rank = {}
   for (var cnt = 0;cnt < rules.length;cnt++) {
-
+    var rule = rules[cnt]
+    var right_facts = rule.split(':-')[1].split(',')
+    for (var cnt2 = 0;cnt2 < right_facts.length;cnt2++) {
+      var fact = right_facts[cnt2].trim()
+      if (rank[fact]) {
+        rank[fact] += 1
+      } else {
+        rank[fact] = 1
+      }
+    }
   }
+
+
+  var max = -1
+  var index = ''
+  var keys = Object.keys(rank)
+  for (var cnt = 0;cnt < keys.length;cnt++) {
+    var key = keys[cnt]
+    if (rank[key] > max) {
+      max = rank[key]
+      index = key
+    }
+  }
+  return index
+}
+
+const get_best_result_by = (rules, right_fact) => {
+  var best_rule = ''
+  var flag = true
+  var min = 0
+  for (var cnt = 0;cnt < rules.length;cnt++) {
+    var rule = rules[cnt]
+    var right_facts_str = rule.split(':-')[1]
+    if (right_facts_str.indexOf(right_fact) < 0) {
+      continue
+    }
+    var count = right_facts_str.split(',').length
+    if (flag) {
+      flag = false
+      best_rule = rule
+      min = count
+    } else if (min > count) {
+      best_rule = rule
+      min = count
+    }
+  }
+  return best_rule
 }
 
 module.exports.is_fact = is_fact
@@ -104,3 +150,4 @@ module.exports.is_rule = is_rule
 module.exports.get_describes = get_describes
 module.exports.inference = inference
 module.exports.get_max_appear_right_fact = get_max_appear_right_fact
+module.exports.get_best_result_by = get_best_result_by

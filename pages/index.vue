@@ -29,13 +29,13 @@ export default {
   },
   methods: {
     send_message: function () {
-      if (this.$refs.msg.value === '') {
+      if (this.$refs.msg.value.trim() === '') {
         return
       }
       this.show = 'No'
       var log = {
         name: 'me',
-        content: this.$refs.msg.value
+        content: this.$refs.msg.value.trim()
       }
       this.logs.push(log)
       this.$nextTick(function () {
@@ -47,11 +47,14 @@ export default {
   },
   mounted: function () {
     this.$nextTick(function () {
-      this.logs.push({name: 'chatbot', content: '如果需要推薦，適合領養的動物，請輸入「我需要幫助」。如果不需要幫助，可以在上方「<a href="/animals">動物一覽</a>」找尋想要的浪浪'})
+      this.logs.push({name: 'chatbot', content: '如果需要推薦，適合領養的動物，請輸入「我需要幫助」。<br/>如果不需要幫助，可以在上方「<a href="/animals">動物一覽</a>」找尋想要的浪浪'})
     })
   },
   sockets: {
     push_message: function (pack) {
+      if (pack.content === '') {
+        return
+      }
       this.show = 'No'
       this.logs.push(pack)
       this.$nextTick(function () {

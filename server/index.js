@@ -47,19 +47,32 @@ app.use(nuxt.render)
 const server = http.createServer(app)
 const io = socketio(server)
 io.on('connection', (socket) => {
+  var facts = []
+  var rules = []
+  socket.on('send_message', (pack) => {
+    if (pack.content === '我需要幫助') {
+      kb.all_facts_and_rules()
+        .then(origin_set => {
+          facts = origin_set.facts
+          rules = origin_set.rules
 
-  kb.all_facts()
-    .then(facts => {
-      kb.all_rules()
-        .then(rules => {
-          socket.on('send_message', (pack) => {
-            var entry = ieif.keep_talk(facts, rules, pack.content)
-            facts = entry.facts
-            rules = entry.rules
-            socket.emit('push_message', {name: 'chatbot', content: entry.content})
-          })
+          ieif.keep_talk(facts, rules, pack.content)
+            .then((entry) => {
+              facts = entry.facts
+              rules = entry.rules
+              socket.emit('push_message', {name: 'chatbot', content: entry.content})
         })
-    })
+        })
+    } else {
+      ieif.keep_talk(facts, rules, pack.content)
+        .then((entry) => {
+          facts = entry.facts
+          rules = entry.rules
+          socket.emit('push_message', {name: 'chatbot', content: entry.content})
+        })
+    }
+
+  })
 
 })
 

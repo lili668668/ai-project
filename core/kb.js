@@ -155,6 +155,18 @@ const find_animal = (id) => {
   })
 }
 
+const all_facts_and_rules = () => {
+  return new Promise((resolve, reject) => {
+    return all_facts()
+      .then(facts => {
+      return all_rules()
+        .then(rules => {
+        resolve({facts: facts, rules: rules})
+      })
+    })
+  })
+}
+
 module.exports.add_animal = add_animal
 module.exports.delete_animal = delete_animal
 module.exports.add_fact = add_fact
@@ -165,3 +177,4 @@ module.exports.all_animals = all_animals
 module.exports.all_facts = all_facts
 module.exports.all_rules = all_rules
 module.exports.find_animal = find_animal
+module.exports.all_facts_and_rules = all_facts_and_rules
