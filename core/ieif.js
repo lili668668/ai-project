@@ -18,7 +18,7 @@ const sub_keep_talk = (facts, rules) => {
 
             for (var cnt = 0;cnt < list.length;cnt++) {
               if (list[cnt][key] === val) {
-                var content = `我們推薦您可以認養這隻浪浪<br/><a href="/animals/${list[cnt]['id']}">${list[cnt]['name']}</a><br/>若您還想繼續查詢，可以再次輸入「我需要幫助」<br/>或是您也可以到上方的<a href="/animals">動物一覽</a>，認識更多浪浪`
+                var content = `我們推薦您可以認養這隻浪浪<br/><a href="/animals/${list[cnt]['id']}">${list[cnt]['name'] || '無名'}</a><br/>若您還想繼續查詢，可以再次輸入「我需要幫助」<br/>或是您也可以到上方的<a href="/animals">動物一覽</a>，認識更多浪浪`
                 resolve({facts: facts, rules: rules, content: content})
               }
             }

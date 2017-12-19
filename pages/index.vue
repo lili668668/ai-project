@@ -25,7 +25,9 @@ import ChatbotChatFrame from '~/components/chatbot-chat-frame.vue'
 export default {
   props: {
     logs: { type: Array, default: function () { return [] } },
-    show: { type: String, default: 'Yes' }
+    show: { type: String, default: 'Yes' },
+    facts: { type: Array, default: function () { return [] } },
+    rules: { type: Array, default: function () { return [] } }
   },
   methods: {
     send_message: function () {
@@ -41,7 +43,7 @@ export default {
       this.$nextTick(function () {
         this.$refs.msg.value = ''
         this.show = 'Yes'
-        this.$socket.emit('send_message', log)
+        this.$socket.emit('send_message', {facts: this.facts, rules: this.rules, name: log.name, content: log.content})
       })
     }
   },
@@ -52,6 +54,9 @@ export default {
   },
   sockets: {
     push_message: function (pack) {
+      this.facts = pack.facts
+      this.rules = pack.rules
+      console.log(this.facts)
       if (pack.content === '') {
         return
       }

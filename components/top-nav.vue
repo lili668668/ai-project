@@ -7,7 +7,7 @@
         <div class="collapse navbar-collapse" id="topnav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                  <a class="nav-link" href="/animals">寵物一覽</a>
+                  <a class="nav-link" href="/animals">動物一覽</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/facts">事實一覽</a>
