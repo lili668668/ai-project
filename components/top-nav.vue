@@ -10,9 +10,6 @@
                   <a class="nav-link" href="/animals">動物一覽</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/facts">事實一覽</a>
-                </li>
-                <li class="nav-item">
                   <a class="nav-link" href="/rules">規則一覽</a>
                 </li>
             </ul>
