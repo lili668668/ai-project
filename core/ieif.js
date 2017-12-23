@@ -3,6 +3,10 @@ const kb = require('./kb.js')
 
 const sub_keep_talk = (facts, rules) => {
   return new Promise((resolve, reject) => {
+    if (rules.length === 0) {
+      var content = `很抱歉，無法找到適合您的浪浪，您可以再次輸入「我需要幫助」<br/>或是您也可以到上方的<a href="/animals">動物一覽</a>，認識更多浪浪`
+      resolve({facts: facts, rules: rules, content: content})
+    }
     var one_fact = ie.get_max_appear_right_fact(rules)
     if (facts.indexOf(one_fact) >= 0) {
       var best_rule = ie.get_best_result_by(rules, one_fact)
