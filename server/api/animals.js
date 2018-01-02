@@ -7,7 +7,7 @@ const router = Router()
 router.get('/animals', function (req, res, next) {
   kb.all_animals().then(obj => {
     var send_data = {}
-    send_data['thead'] = ['id', '名字', '種類', '性別', '位置', '聯絡電話', '聯絡Email']
+    send_data['thead'] = ['id', '種類', '性別', '位置', '聯絡電話']
     send_data['tbody'] = obj.list
     send_data['error'] = obj.error
     res.json(send_data)

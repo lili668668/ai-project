@@ -4,7 +4,6 @@
    動物們
   </h1>
   <div class="row">
-    <div class="col"></div>
     <div class="col">
       <div v-if="data['error']">
         <p><a href="http://data.taipei">台北市開放資料平台</a>目前狀態不穩</p>
@@ -17,17 +16,14 @@
         <tbody>
           <tr v-for="td in data['tbody']" :key="td.id">
             <td> <a :href="'/animals/' + td.id"> {{ td.id }} </a> </td>
-            <td> {{ td.name }} </td>
             <td> {{ td.type }} </td>
             <td> {{ td.sex }} </td>
             <td> {{ td.resettlement }} </td>
             <td> {{ td.contact_phone }} </td>
-            <td> {{ td.contact_email }} </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="col"></div>
   </div>
   <a href="/animals/add" class="mdc-fab material-icons app-fab--absolute" aria-label="Add">
     <span class="mdc-fab__icon">
