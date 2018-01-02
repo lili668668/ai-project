@@ -10,12 +10,6 @@
         <div class="row">
           如果
         </div>
-        <div class="form-group row">
-          <label for="if_num" class="col-4 control-label text-right">有幾個前因</label>
-          <div class="col-8">
-            <input type="number" class="form-control" name="if_num" v-bind:value="if_num" v-on:input="updateValue($event.target.value)" min="1" max="10" step="1">
-          </div>
-        </div>
         <template v-if="show === 'Yes'">
           <fact-form v-for="n in parseInt(if_num)" :key="n" v-bind:cnt="n"></fact-form>
         </template>
